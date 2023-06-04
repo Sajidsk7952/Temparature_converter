@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temparature converter</title>
+</head>
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        /* background-color: rgb(211, 217, 220); */
+        align-items: center;
+        /* background: url(./clouds.jpg); */
+    }
+
+    .content {
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        background-image: url(./clouds.jpg);
+        background-size: cover;
+        background-position: center;
+        margin-top: 0px;
+        z-index: 5;
+        /* margin-left: 30px; */
+        position: absolute;
+        align-content: center;
+        margin: 30px;
+        margin: auto;
+        /* display: grid; */
+        /* grid-auto-flow: row; */
+        /* grid-row-start: auto; */
+    }
+
+    .head{
+        text-align: center;
+        text-transform: capitalize;
+        font-size: 1.5rem;
+    }
+
+    .data {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .text {
+        color: brown;
+        text-transform: capitalize;
+        display: none;
+    }
+
+    .convert {
+        width: 30%;
+        padding: 10px;
+        background-color: rgb(178, 203, 207);
+        transition: 0.3s ease;
+        border: none;
+    }
+
+    .convert:hover {
+        box-shadow: 2px 3px 5px black;
+        border: 1px solid black;
+    }
+
+    #celsius {
+        margin: 20px;
+        /* outline: none; */
+        width: 60%;
+        padding: 10px;
+        border: 1px solid rgb(38, 39, 39);
+        transition: 0.5s ease all;
+    }
+
+    #celsius:focus {
+        outline: none;
+        transform: scale(1.03);
+        border: 2px solid blue;
+        /* box-shadow: 2px 2px 4px black; */
+    }
+
+    .data {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .display{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<body>
+    <div class="content">
+        <!-- <h4 class="text">the current Temparature is:<span class="temp"></span></h4> -->
+        <h4 class="head main">enter the temperature in celsius: </h4>
+        <div class="data">
+            <input type="number" name="celsius" id="celsius">
+            <button class="convert">convert</button>
+        </div>
+        <div class="display">
+            <h4 class="text farentext">the temperature in farenheit is:</h4>
+            <p class="farenheit"></p>
+            <h4 class="text kelvintext">the temperature in kelvin:</h4>
+            <p class="kelvin"></p>
+        </div>
+    </div>
+    <script>
+        let input = document.querySelector("#celsius");
+        input.addEventListener("keyup",(e)=>{
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.querySelector(".convert").click();
+            }
+        })
+        document.querySelector(".convert").addEventListener("click", () => {
+            let h = document.querySelectorAll(".text")
+            for (let i = 0; i < h.length; i++) {
+                let ele = h[i]
+                ele.style.display = "block";
+            }
+            let cel = document.querySelector("#celsius")
+            let show = document.querySelector(".farenheit");
+            let kelvin = document.querySelector(".kelvin");
+            let temp = cel.valueAsNumber;
+            show.innerHTML = temp * 9 / 5 + 32 + "F";
+            kelvin.innerHTML = temp + 273.15 + "k";
+        });
+    </script>
+</body>
+</html>
